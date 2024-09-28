@@ -1,4 +1,4 @@
-import numpy
+#import numpy
 import pandas
 import copy
 
@@ -301,7 +301,7 @@ def printSimpleGrid(game):
 # eliminateFound() : if in any ninesome (row, column, square) we have
 # found the cell in which a number goes, remove it from all other cells.
 #
-def eliminateFound(nines, triplets, debugLevel=0):
+def eliminateFound(nines, _, debugLevel=0):
     count = 0
 
     for ix, nine in enumerate(nines):
@@ -329,7 +329,7 @@ def eliminateFound(nines, triplets, debugLevel=0):
 # uniqueCell() : if in any ninesome (row, column, square) a number is
 # found in only one cell, eliminate all other numbers in that cell
 #
-def uniqueCell(nines, triplets, debugLevel=0):
+def uniqueCell(nines, _, debugLevel=0):
     count = 0
 
     for ix, nine in enumerate(nines):
@@ -412,7 +412,7 @@ def lockedCandidates(nines, triplets, debugLevel=0):
 # is called an X-Wing Rule, though I kind of like Hashtag Rule better (because you are
 # essentially creating a hashtag of two rows and two columns).
 
-def xWing(nines, triplets, debugLevel=0):
+def xWing(nines, _, debugLevel=0):
     count = 0
 
     for i1, row1 in enumerate(nines[0:8]):
@@ -456,7 +456,7 @@ def xWing1(nines, line1, line2, perps, pairName, debugLevel=0):
 # subsets of it, then its numbers can be removed from all other cells
 # in the nine.
 #
-def nakedTuple(nines, triplets, debugLevel=0):
+def nakedTuple(nines, _, debugLevel=0):
     count = 0
     
     for ix, nine in enumerate(nines):
@@ -488,7 +488,7 @@ def nakedTuple(nines, triplets, debugLevel=0):
 # supersets of it, and its numbers appear in no other cell, then we
 # can eliminate all other numbers in the superset cells.
 #
-def hiddenTuple(nines, triplets, debugLevel=0):
+def hiddenTuple(nines, _, debugLevel=0):
     count = 0
     
     for ix, nine in enumerate(nines):
@@ -521,7 +521,7 @@ def hiddenTuple(nines, triplets, debugLevel=0):
 # line for implementing more complex rules.  We'll do a search from
 # here on out.
 
-def swordfish(nines, triplets, debugLevel=0):
+def swordfish(nines, _, debugLevel=0):
     count = 0
 
     for i1, row1 in enumerate(nines[0:7]):
@@ -567,3 +567,20 @@ def swordfish1(nines, line1, line2, line3, perps, trioName, debugLevel=0):
             printGrid(nines[0:9])
 
     return count
+
+
+# -----------------------------
+
+puzzle = [
+    [0, 0, 6, 1, 0, 0, 0, 0, 8], 
+    [0, 8, 0, 0, 9, 0, 0, 3, 0], 
+    [2, 0, 0, 0, 0, 5, 4, 0, 0], 
+    [4, 0, 0, 0, 0, 1, 8, 0, 0], 
+    [0, 3, 0, 0, 7, 0, 0, 4, 0], 
+    [0, 0, 7, 9, 0, 0, 0, 0, 3], 
+    [0, 0, 8, 4, 0, 0, 0, 0, 6], 
+    [0, 2, 0, 0, 5, 0, 0, 8, 0], 
+    [1, 0, 0, 0, 0, 2, 5, 0, 0]
+]
+
+printGrid(sudoku_solver(puzzle), False)
